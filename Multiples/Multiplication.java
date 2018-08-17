@@ -1,6 +1,5 @@
 package Multiples;
 
-import java.math.BigInteger;
 import java.util.Arrays;
 
 public class Multiplication
@@ -39,6 +38,7 @@ public class Multiplication
         else
         {
             int halfLength = num1.length / 2;
+            int fullLength = num1.length;
 
             int[] num1FirstHalf = Arrays.copyOf(num1, halfLength);
             int[] num1SecondHalf = Arrays.copyOfRange(num1, halfLength, num1.length);
@@ -51,17 +51,34 @@ public class Multiplication
             int[] bd = multiply(num1SecondHalf, num2SecondHalf);
 
 
+
             return null;
         }
     }
 
-    public int[] recIntMult(int[] ac, int[] ad, int[] bc, int[] bd)
+    public int[] recIntMult(int[] ac, int[] ad, int[] bc, int[] bd, int length)
     {
-        return null;
+        int[] tenToPowerOfLength = Arrays.copyOf(ac, ac.length + length);
+        int[] additionOfADandBC = arrayAddition(ad, bc);
+        additionOfADandBC = Arrays.copyOf(additionOfADandBC, additionOfADandBC.length + length / 2);
+
+        int[] sum = arrayAddition(tenToPowerOfLength, additionOfADandBC);
+        sum = arrayAddition(sum, bd);
+
+        return sum;
+
     }
 
     public int[] arrayAddition(int[] num1, int[] num2)
     {
+        if (num1.length > num2.length)
+        {
+            num2 = arrayCopyWithLeadingZeroes(num2, num1.length - num2.length);
+        } else if (num2.length > num1.length)
+        {
+            num1 = arrayCopyWithLeadingZeroes(num1, num2.length - num1.length);
+        }
+
         int[] answer = new int[num1.length];
         for (int i = num1.length - 1; i >= 0; i--)
         {
@@ -73,7 +90,7 @@ public class Multiplication
                 //Adding Function is at last digit and needs more space
                 if (i == 0)
                 {
-                    answer = this.arrayCopyLeadingZero(answer);
+                    answer = this.arrayCopyWithLeadingZeroes(answer, 1);
                     answer[0] = sum / 10;
                 }
                 else
@@ -85,14 +102,14 @@ public class Multiplication
         return answer;
     }
 
-    public int[] arrayCopyLeadingZero(int[] num1)
+    public int[] arrayCopyWithLeadingZeroes(int[] num1, int zeroes)
     {
-        int[] answer = new int[num1.length + 1];
-        answer[0] = 0;
+        int[] answer = new int[num1.length + zeroes];
+        //answer[0] = 0;
 
-        for (int i = 1; i < answer.length; i++)
+        for (int i = zeroes; i < answer.length; i++)
         {
-            answer[i] = num1[i - 1];
+            answer[i] = num1[i-zeroes];
         }
         return answer;
     }
@@ -114,14 +131,21 @@ class MultipleTesters
         int[] testNum1 = {1, 3};
         int[] testNum2 = {9, 4};
 
+        int[] firstHalfnum = {1};
+        int[] secondHalfNum = {3};
+        int[] firstHalfNum2 = {9};
+        int[] secondHalfNum2 = {4};
+
         Multiplication mult = new Multiplication(testNum1, testNum2);
 
         //int[] answer = mult.multiply(mult.num1, mult.num2);
 
+        int[] product = mult.recIntMult(firstHalfnum, firstHalfNum2, secondHalfNum, secondHalfNum2, firstHalfnum.length);
 
-        int[] rawrs = mult.arrayCopyLeadingZero(num1);
 
-        int[] sum = mult.arrayAddition(testNum1, testNum2);
+        //int[] rawrs = mult.arrayCopyWithLeadingZeroes(num1, 2);
+
+        //int[] sum = mult.arrayAddition(testNum1, testNum2);
 
 
     }
