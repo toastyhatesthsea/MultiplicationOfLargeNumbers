@@ -50,9 +50,7 @@ public class Multiplication
             int[] bc = multiply(num1SecondHalf, num2FirstHalf);
             int[] bd = multiply(num1SecondHalf, num2SecondHalf);
 
-
-
-            return null;
+            return recIntMult(ac, ad, bc, bd, fullLength);
         }
     }
 
@@ -83,7 +81,7 @@ public class Multiplication
         for (int i = num1.length - 1; i >= 0; i--)
         {
             int sum = num1[i] + num2[i];
-            answer[i] = sum % 10;
+            answer[i] = sum % 10 + answer[i];
 
             if (sum >= 10)
             {
@@ -95,7 +93,7 @@ public class Multiplication
                 }
                 else
                 {
-                    answer[i - 1] = sum / 10;
+                    answer[i - 1] = sum / 10 + answer[i - 1];
                 }
             }
         }
@@ -128,19 +126,24 @@ class MultipleTesters
         int[] num1 = {3,1,4,1,5,9,2,6,5,3,5,8,9,7,9,3,2,3,8,4,6,2,6,4,3,3,8,3,2,7,9,5,0,2,8,8,4,1,9,7,1,6,9,3,9,9,3,7,5,1,0,5,8,2,0,9,7,4,9,4,4,5,9,2};
         int[] num2 = {2,7,1,8,2,8,1,8,2,8,4,5,9,0,4,5,2,3,5,3,6,0,2,8,7,4,7,1,3,5,2,6,6,2,4,9,7,7,5,7,2,4,7,0,9,3,6,9,9,9,5,9,5,7,4,9,6,6,9,6,7,6,2,7};
 
-        int[] testNum1 = {1, 3};
-        int[] testNum2 = {9, 4};
+        int[] testNum1 = {1, 3, 3, 4};
+        int[] testNum2 = {9, 4, 3, 4};
 
         int[] firstHalfnum = {1};
         int[] secondHalfNum = {3};
         int[] firstHalfNum2 = {9};
         int[] secondHalfNum2 = {4};
 
+        int[] ac = {9};
+        int[] ad = {4};
+        int[] bc = {2, 7};
+        int[] bd = {1, 2};
+
         Multiplication mult = new Multiplication(testNum1, testNum2);
 
-        //int[] answer = mult.multiply(mult.num1, mult.num2);
+        int[] answer = mult.multiply(mult.num1, mult.num2);
 
-        int[] product = mult.recIntMult(firstHalfnum, firstHalfNum2, secondHalfNum, secondHalfNum2, firstHalfnum.length);
+        //int[] product = mult.recIntMult(ac, ad, bc, bd, 2);
 
 
         //int[] rawrs = mult.arrayCopyWithLeadingZeroes(num1, 2);
