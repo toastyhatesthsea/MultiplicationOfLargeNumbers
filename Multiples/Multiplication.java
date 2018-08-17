@@ -70,16 +70,16 @@ public class Multiplication
 
             if (sum > 10)
             {
+                //Adding Function is at last digit and needs more space
                 if (i == 0)
                 {
-                    answer = Arrays.copyOf(answer, answer.length + 1);
+                    answer = this.arrayCopyLeadingZero(answer);
                     answer[0] = sum % 10;
                 }
-
-
-
-
-
+                else
+                {
+                    answer[i - 1] = sum / 10;
+                }
             }
         }
         return null;
@@ -119,7 +119,9 @@ class MultipleTesters
         //int[] answer = mult.multiply(mult.num1, mult.num2);
 
 
-        int[] rawrs = Arrays.copyOf(num1, num1.length + 1);
+        int[] rawrs = mult.arrayCopyLeadingZero(num1);
+
+        int[] sum = mult.arrayAddition(testNum1, testNum2);
 
 
     }
