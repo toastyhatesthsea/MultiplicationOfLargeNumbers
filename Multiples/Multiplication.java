@@ -85,6 +85,18 @@ public class Multiplication
         return null;
     }
 
+    public int[] arrayCopyLeadingZero(int[] num1)
+    {
+        int[] answer = new int[num1.length + 1];
+        answer[0] = 0;
+
+        for (int i = 1; i < answer.length; i++)
+        {
+            answer[i] = num1[i - 1];
+        }
+        return answer;
+    }
+
 
 }
 
