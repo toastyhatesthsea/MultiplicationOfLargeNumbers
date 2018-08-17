@@ -68,13 +68,13 @@ public class Multiplication
             int sum = num1[i] + num2[i];
             answer[i] = sum % 10;
 
-            if (sum > 10)
+            if (sum >= 10)
             {
                 //Adding Function is at last digit and needs more space
                 if (i == 0)
                 {
                     answer = this.arrayCopyLeadingZero(answer);
-                    answer[0] = sum % 10;
+                    answer[0] = sum / 10;
                 }
                 else
                 {
@@ -82,7 +82,7 @@ public class Multiplication
                 }
             }
         }
-        return null;
+        return answer;
     }
 
     public int[] arrayCopyLeadingZero(int[] num1)
@@ -112,7 +112,7 @@ class MultipleTesters
         int[] num2 = {2,7,1,8,2,8,1,8,2,8,4,5,9,0,4,5,2,3,5,3,6,0,2,8,7,4,7,1,3,5,2,6,6,2,4,9,7,7,5,7,2,4,7,0,9,3,6,9,9,9,5,9,5,7,4,9,6,6,9,6,7,6,2,7};
 
         int[] testNum1 = {1, 3};
-        int[] testNum2 = {2, 4};
+        int[] testNum2 = {9, 4};
 
         Multiplication mult = new Multiplication(testNum1, testNum2);
 
