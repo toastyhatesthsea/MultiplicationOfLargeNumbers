@@ -62,7 +62,27 @@ public class Multiplication
 
     public int[] arrayAddition(int[] num1, int[] num2)
     {
+        int[] answer = new int[num1.length];
+        for (int i = num1.length - 1; i >= 0; i--)
+        {
+            int sum = num1[i] + num2[i];
+            answer[i] = sum % 10;
 
+            if (sum > 10)
+            {
+                if (i == 0)
+                {
+                    answer = Arrays.copyOf(answer, answer.length + 1);
+                    answer[0] = sum % 10;
+                }
+
+
+
+
+
+            }
+        }
+        return null;
     }
 
 
@@ -84,9 +104,10 @@ class MultipleTesters
 
         Multiplication mult = new Multiplication(testNum1, testNum2);
 
-        int[] answer = mult.multiply(mult.num1, mult.num2);
+        //int[] answer = mult.multiply(mult.num1, mult.num2);
 
 
+        int[] rawrs = Arrays.copyOf(num1, num1.length + 1);
 
 
     }
